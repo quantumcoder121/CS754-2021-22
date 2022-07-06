@@ -1,0 +1,48 @@
+\title{Assignment 2: CS 754, Advanced Image Processing}
+\author{}
+\date{Due: 16th Feb before 11:55 pm}
+
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,soul}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{ulem}
+\usepackage[margin=0.5in]{geometry}
+\begin{document}
+\maketitle
+
+\textbf{Remember the honor code while submitting this (and every other) assignment. All members of the group should work on and \emph{understand} all parts of the assignment. We will adopt a \textbf{zero-tolerance policy} against any violation.}
+\\
+\\
+\textbf{Submission instructions:} You should ideally type out all the answers in Word (with the equation editor) or using Latex. In either case, prepare a pdf file. Create a single zip or rar file containing the report, code and sample outputs and name it as follows: A2-IdNumberOfFirstStudent-IdNumberOfSecondStudent.zip. (If you are doing the assignment alone, the name of the zip file is A2-IdNumber.zip). Upload the file on moodle BEFORE 11:55 pm on 16th Feb. No assignments will be accepted after a cutoff deadline of 10 am on 17th Feb. Note that only one student per group should upload their work on moodle. Please preserve a copy of all your work until the end of the semester. \emph{If you have difficulties, please do not hesitate to seek help from me.} 
+
+\begin{enumerate}
+\item Refer to a copy of the paper `The restricted isometry property and its implications for compressed sensing' in the homework folder. Your task is to open the paper and answer the question posed in each and every green-colored highlight. The task is the complete proof of Theorem 3 done in class. \textsf{[32 points = 2 points for each of the 16 questions]}
+
+\item Consider compressive measurements $\boldsymbol{y} = \boldsymbol{\Phi x} + \boldsymbol{\eta}$ of a purely sparse signal $\boldsymbol{x}$, where $\|\boldsymbol{\eta}\|_2 \leq \epsilon$. When we studied Theorem 3 in class, I had made a statement that the solution provided by the basis pursuit problem for a purely sparse signal comes very close (i.e. has an error that is only a constant factor worse than) an oracular solution. An oracular solution is defined as the solution that we could obtain if we knew in advance the indices (set $S$) the non-zero elements of the signal $\boldsymbol{x}$. This homework problem is to understand my statement better. For this, do as follows. In the following, we will assume that the inverse of $\boldsymbol{\Phi^T_S \Phi_S}$ exists, where $\boldsymbol{\Phi_S}$ is a submatrix of $\boldsymbol{\Phi}$ with columns belonging to indices in $S$.
+\begin{enumerate}
+\item Express the oracular solution $\boldsymbol{\tilde{x}}$ using a pseudo-inverse of the sub-matrix $\boldsymbol{\Phi_S}$. \textsf{[5 points]}
+\item Now, show that $\|\boldsymbol{\tilde{x}}-\boldsymbol{x}\|_2 = \|\boldsymbol{\Phi^{\dagger}_S \eta}\|_2 \leq \|\boldsymbol{\Phi^{\dagger}_S}\|_2 \|\boldsymbol{\eta}\|_2$. 
+Here $\boldsymbol{\Phi^{\dagger}_S} \triangleq (\boldsymbol{\Phi^T_S \Phi_S})^{-1} \boldsymbol{\Phi^T_S }$ is standard notation for the pseudo-inverse of $\boldsymbol{\Phi_S}$. The largest singular value of matrix $\boldsymbol{X}$ is denoted as $\|\boldsymbol{X}\|_2$.  \textsf{[3 points]}
+\item Argue that the largest singular value of $\boldsymbol{\Phi^{\dagger}_S}$ lies between $\dfrac{1}{\sqrt{1+ \delta_{2k}}}$ and $\dfrac{1}{\sqrt{1- \delta_{2k}}}$ where $k = |S|$ and $\delta_{2k}$ is the RIC of $\boldsymbol{\Phi}$ of order $2k$.  \textsf{[4 points]}
+\item This yields $\dfrac{\epsilon}{\sqrt{1+\delta_{2k}}} \leq \|\boldsymbol{x}-\boldsymbol{\tilde{x}}\|_2 \leq \dfrac{\epsilon}{\sqrt{1-\delta_{2k}}}$. Argue that the solution given by Theorem 3 is only a constant factor worse than this solution.  \textsf{[3 points]}
+\end{enumerate}
+
+\item If $s < t$ where $s$ and $t$ are positive integers, prove that $\delta_s \leq \delta_t$ where $\delta_s, \delta_t$ stand for the restricted isometry constant (of any sensing matrix) of order $s$ and $t$ respectively. \textsf{[8 points]}
+
+\item Here is our obligatory Google search question :-). Your task is to search the web for papers that used some technique of sensing matrix design (eg: coherence minimization, RIC minimization, or any other) to improve the performance of a practical compressive imaging system. (Hint: Look at the archives of journals such as IEEE Transactions on Computational Imaging, IEEE Transactions on Image Processing, Applied Optics or the webpages of authors such as David Brady or Gonzalo Arce). To answer this question, do the following:
+\begin{enumerate}
+\item Mention the title, venue, author list publication year of the paper. Put a link to it.
+\item Briefly describe the imaging system in the paper; you may refer to figures from the paper itself or refer to lecture slides.
+\item Write the mathematical expression for the matrix quality measure being optimized in the paper, along with various contraints on the matrix (eg: non-negative elements, block diagonal, etc.).
+\item Mention the optimization technique. 
+\item Briefly describe the improvements due to this design as compared to a random design. You may refer to tables or graphs from the paper itself. 
+\end{enumerate} \textsf{[3 +3 + 3 + 3 + 3 =15 points]}
+
+\item Consider the problem P1: $\textrm{min}_{\boldsymbol{x}} \|\boldsymbol{x}\|_1 \textrm{ s. t. } \|\boldsymbol{y}-\boldsymbol{\Phi x}\|_2 \leq \epsilon$. Also consider the LASSO problem which seeks to minimize the cost function $J(\boldsymbol{x}) = \|\boldsymbol{y}-\boldsymbol{\Phi x}\|^2_2 + \lambda \|\boldsymbol{x}\|_1$. If $\boldsymbol{x}$ is a minimizer of $J(.)$ for some value of $\lambda > 0$, then show that there exists some value of $\epsilon$ for which $\boldsymbol{x}$ is also the minimizer of the problem P1. \textsf{[15 points]} (Hint: Consider $\epsilon' = \|\boldsymbol{y} - \boldsymbol{\Phi x}\|_2$. Now use the fact that $\boldsymbol{x}$ is a minimizer of $J(.)$ to show that it is also a minimizer of P1 subject to an appropriate constraint involving $\epsilon'$.)
+
+\item Suppose there are $n$ subjects being tested by Dorfman pooling and only $k \ll n$ out of these are infected. In the first round, assume that the $n$ subjects are divided into groups of size $g$ each. For simplicity, assume $n/g$ is an integer. Derive a formula for the average number of tests required to be performed in Dorfman pooling. What is the worst case? What is the optimal group size in the worst case? \textsf{[15 points]}
+
+\end{enumerate}
+\end{document}
